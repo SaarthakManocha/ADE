@@ -1,0 +1,24 @@
+{
+  "policies": [
+    {
+      "id": "admin-delete-any",
+      "priority": 10,
+      "effect": "ALLOW",
+      "conditions": {
+        "actor.role": "admin",
+        "action": "delete"
+      },
+      "reason": "Admins can delete resources"
+    },
+    {
+      "id": "no-delete-at-night",
+      "priority": 20,
+      "effect": "DENY",
+      "conditions": {
+        "action": "delete",
+        "context.time": "night"
+      },
+      "reason": "No deletions allowed at night"
+    }
+  ]
+}
