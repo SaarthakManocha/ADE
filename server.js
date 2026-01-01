@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const decide = require("./engine");
 
@@ -22,7 +24,19 @@ function validateRequest(body) {
   return errors;
 }
 
-app.post("/decide", (req, res) => {
+function authenticate(req, res, next) {
+  const apiKey = req.headers["x-api-key"];
+
+  if (!apiKey || apiKey !== process.env.ADE_API_KEY) {
+    return res.status(401).json({
+      error: "Unauthorized: invalid or missing API key"
+    });
+  }
+
+  next();
+}
+
+app.post("/decide", authenticate, (req, res) => {
   const errors = validateRequest(req.body);
 
   if (errors.length > 0) {
