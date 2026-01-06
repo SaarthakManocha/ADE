@@ -1,3 +1,4 @@
+const { log } = require("./logger");
 require("dotenv").config();
 
 const express = require("express");
@@ -33,6 +34,7 @@ function authenticate(req, res, next) {
     });
   }
 
+  req.caller = "internal-client";
   next();
 }
 
@@ -50,6 +52,14 @@ app.post("/decide", authenticate, (req, res) => {
 
   try {
     const result = decide(actor, action, resource, context || {});
+    log("decision_made", {
+      caller: req.caller,
+      actor: actor.role,
+      action,
+      resource: resource.type,
+      decision: result.decision,
+      policy: result.policyId || null
+    });
     res.json(result);
   } catch (err) {
     console.error("Decision engine error:", err);
