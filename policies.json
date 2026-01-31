@@ -1,7 +1,13 @@
 {
+  "version": "1.0.0",
+  "lastModified": "2026-01-31T08:00:00Z",
+  "author": "system",
   "policies": [
     {
       "id": "admin-delete-any",
+      "version": "1.0",
+      "createdAt": "2025-12-22T00:00:00Z",
+      "author": "saarthak",
       "priority": 10,
       "effect": "ALLOW",
       "conditions": {
@@ -12,6 +18,9 @@
     },
     {
       "id": "no-delete-at-night",
+      "version": "1.0",
+      "createdAt": "2025-12-22T00:00:00Z",
+      "author": "saarthak",
       "priority": 20,
       "effect": "DENY",
       "conditions": {

@@ -1,8 +1,12 @@
 const fs = require("fs");
 
-function loadPolicies() {
+function loadPolicyFile() {
   const data = fs.readFileSync("policies.json", "utf-8");
-  return JSON.parse(data).policies;
+  return JSON.parse(data);
+}
+
+function loadPolicies() {
+  return loadPolicyFile().policies;
 }
 
 function getValue(path, data) {
@@ -66,6 +70,7 @@ function decide(actor, action, resource, context) {
     decision: winner.effect,
     reason: winner.reason,
     policyId: winner.id,
+    policyVersion: winner.version || null,
     audit: {
       evaluations,
       matchedPolicies: matchedPolicies.map(p => p.id),
@@ -74,4 +79,4 @@ function decide(actor, action, resource, context) {
   };
 }
 
-module.exports = decide;
+module.exports = { decide, loadPolicyFile };

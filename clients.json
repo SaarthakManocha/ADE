@@ -1,0 +1,22 @@
+{
+  "clients": [
+    {
+      "id": "access-simulator",
+      "name": "Access Simulator Demo",
+      "apiKey": "super-secret-key-123",
+      "enabled": true
+    },
+    {
+      "id": "backend-service",
+      "name": "Backend Service",
+      "apiKey": "backend-prod-key-456",
+      "enabled": true
+    },
+    {
+      "id": "admin-console",
+      "name": "Admin Console",
+      "apiKey": "admin-console-key-789",
+      "enabled": true
+    }
+  ]
+}
